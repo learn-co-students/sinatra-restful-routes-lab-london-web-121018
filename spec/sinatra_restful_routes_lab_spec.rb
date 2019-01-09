@@ -124,16 +124,20 @@ describe "Recipe App" do
         "ingredients" => "pumpkin, flour, butter, sugar",
         "cook_time" => "1 hour"
       }
+      
       post '/recipes', params
+      #binding.pry
       follow_redirect!
     end
 
     it "creates a new recipe and saves to the database" do
+      
       expect(Recipe.all.count).to eq(3)
       expect(Recipe.last.name).to eq("pumpkin pie")
     end
 
     it "redirects to the recipe show page" do 
+      
       expect(last_request.url).to include("/recipes/#{Recipe.last.id}")
     end
   end
